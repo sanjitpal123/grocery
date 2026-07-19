@@ -20,11 +20,11 @@ const swaggerOptions = {
     swaggerOptions: {
         urls: [
             {
-                url: 'http://localhost:5000/api-docs.json',
+                url: `${process.env.AUTH_SERVICE_URL || 'http://localhost:5000'}/api-docs.json`,
                 name: 'Auth Service'
             },
             {
-                url: 'http://localhost:5001/api-docs.json',
+                url: `${process.env.PRODUCTS_SERVICE_URL || 'http://localhost:5001'}/api-docs.json`,
                 name: 'Products Service'
             }
         ]
