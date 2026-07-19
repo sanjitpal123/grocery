@@ -66,10 +66,10 @@ router.post('/register', register);
  *           schema:
  *             type: object
  *             required:
- *               - shopName
+ *               - phone
  *               - password
  *             properties:
- *               shopName:
+ *               phone:
  *                 type: string
  *               password:
  *                 type: string

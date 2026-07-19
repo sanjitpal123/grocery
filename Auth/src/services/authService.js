@@ -9,9 +9,9 @@ export const registerUser = async (shopData) => {
     const { shopName, email, phone, ownerName, password, shopType, address } = shopData;
 
     // 1. Check if user already exists via Repository
-    const existingShop = await authRepository.findShopByNameOrEmail(shopName, email);
+    const existingShop = await authRepository.findShopByPhoneOrEmail(phone, email);
     if (existingShop) {
-        throw new Error("Shop name or email already exists");
+        throw new Error("Phone number or email already exists");
     }
 
     // 2. Hash password
@@ -35,9 +35,9 @@ export const registerUser = async (shopData) => {
 /**
  * Verifies credentials and generates a JWT.
  */
-export const loginUser = async (shopName, password) => {
+export const loginUser = async (phone, password) => {
     // 1. Find the user via Repository
-    const shop = await authRepository.findShopByName(shopName);
+    const shop = await authRepository.findShopByPhone(phone);
     if (!shop) {
         throw new Error("Invalid credentials");
     }

@@ -21,13 +21,13 @@ export const register = async (req, res) => {
 
 export const login = async (req, res) => {
     try {
-        const { shopName, password } = req.body;
-        if (!shopName || !password) {
+        const { phone, password } = req.body;
+        if (!phone || !password) {
             return res.status(400).json({ message: "All fields are required" });
         }
 
         // Delegate heavy lifting to the service
-        const token = await authService.loginUser(shopName, password);
+        const token = await authService.loginUser(phone, password);
 
         // Return response
         res.status(200).json({ token, message: "Login successful" });

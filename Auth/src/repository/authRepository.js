@@ -1,17 +1,17 @@
 import Auth from '../model/Auth.js';
 
 /**
- * Finds a shop by either shopName or email.
+ * Finds a shop by either phone or email to prevent duplicates.
  */
-export const findShopByNameOrEmail = async (shopName, email) => {
-    return await Auth.findOne({ $or: [{ shopName }, { email }] });
+export const findShopByPhoneOrEmail = async (phone, email) => {
+    return await Auth.findOne({ $or: [{ phone }, { email }] });
 };
 
 /**
- * Finds a shop exclusively by shopName.
+ * Finds a shop exclusively by phone number.
  */
-export const findShopByName = async (shopName) => {
-    return await Auth.findOne({ shopName });
+export const findShopByPhone = async (phone) => {
+    return await Auth.findOne({ phone });
 };
 
 /**
