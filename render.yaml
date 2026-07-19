@@ -1,0 +1,57 @@
+services:
+  # 1. Auth Service
+  - type: web
+    name: grocery-auth
+    env: node
+    rootDir: Auth
+    buildCommand: npm install
+    startCommand: npm start
+    envVars:
+      - key: PORT
+        value: 5000
+      - key: JWT_SECRET
+        sync: false
+      - key: MONGO_URI
+        sync: false
+
+  # 2. Products Service
+  - type: web
+    name: grocery-products
+    env: node
+    rootDir: Products
+    buildCommand: npm install
+    startCommand: npm start
+    envVars:
+      - key: PORT
+        value: 5001
+      - key: JWT_SECRET
+        sync: false
+      - key: MONGO_URI
+        sync: false
+      - key: COULD_NAME
+        sync: false
+      - key: COULD_API_KEY
+        sync: false
+      - key: COUlD_SECRET
+        sync: false
+
+  # 3. API Gateway
+  - type: web
+    name: grocery-gateway
+    env: node
+    rootDir: ApiGateway
+    buildCommand: npm install
+    startCommand: npm start
+    envVars:
+      - key: PORT
+        value: 4000
+      - key: AUTH_SERVICE_URL
+        fromService:
+          type: web
+          name: grocery-auth
+          envVarKey: RENDER_EXTERNAL_URL
+      - key: PRODUCTS_SERVICE_URL
+        fromService:
+          type: web
+          name: grocery-products
+          envVarKey: RENDER_EXTERNAL_URL
