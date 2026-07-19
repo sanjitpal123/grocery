@@ -6,13 +6,14 @@ const swaggerOptions = {
     definition: {
         openapi: '3.0.0',
         info: {
-            title: 'Grocery Products API',
+            title: 'Products Microservice API',
             version: '1.0.0',
-            description: 'Inventory Management API for Grocery App',
+            description: 'API documentation for Products Service',
         },
         servers: [
             {
-                url: `http://localhost:${process.env.PORT || 5001}`,
+                url: '/',
+                description: 'Live API Gateway'
             },
         ],
         components: {

@@ -6,14 +6,15 @@ const swaggerOptions = {
     definition: {
         openapi: '3.0.0',
         info: {
-            title: 'Grocery Auth API',
+            title: 'Auth Microservice API',
             version: '1.0.0',
-            description: 'Authentication API for Grocery Maintenance App',
+            description: 'API documentation for Auth Service'
         },
         servers: [
             {
-                url: `http://localhost:${process.env.PORT || 5000}`,
-            },
+                url: '/',
+                description: 'Live API Gateway'
+            }
         ],
     },
     // We now look for swagger annotations in the routes folder instead of controllers
