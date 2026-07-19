@@ -3,6 +3,7 @@ services:
   - type: web
     name: grocery-auth
     env: node
+    plan: free
     rootDir: Auth
     buildCommand: npm install
     startCommand: npm start
@@ -18,6 +19,7 @@ services:
   - type: web
     name: grocery-products
     env: node
+    plan: free
     rootDir: Products
     buildCommand: npm install
     startCommand: npm start
@@ -39,6 +41,7 @@ services:
   - type: web
     name: grocery-gateway
     env: node
+    plan: free
     rootDir: ApiGateway
     buildCommand: npm install
     startCommand: npm start
