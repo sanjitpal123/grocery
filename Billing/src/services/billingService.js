@@ -2,7 +2,6 @@ import * as billingRepository from '../repository/billingRepository.js';
 
 export const createInvoice = async (data) => {
     const {firstName, lastName, phoneNumber, shopId}=data;
-    const create
     return await billingRepository.create(data);
 };
 
