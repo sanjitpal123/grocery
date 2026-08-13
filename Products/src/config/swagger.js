@@ -12,8 +12,8 @@ const swaggerOptions = {
         },
         servers: [
             {
-                url: '/',
-                description: 'Live API Gateway'
+                url: process.env.RENDER_EXTERNAL_URL || 'https://grocery-products.onrender.com',
+                description: 'Live Products API'
             },
         ],
         components: {

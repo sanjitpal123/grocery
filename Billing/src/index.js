@@ -29,7 +29,7 @@ const swaggerOptions = {
         },
         servers: [
             {
-                url: `http://localhost:${PORT}`,
+                url: process.env.RENDER_EXTERNAL_URL || `https://grocery-billing-9or4.onrender.com`,
             },
         ],
     },
