@@ -20,7 +20,7 @@ const swaggerOptions = {
     swaggerOptions: {
         urls: [
             {
-                url: `${process.env.AUTH_SERVICE_URL || 'http://localhost:5000'}/api-docs.json`,
+                url: `${process.env.AUTH_SERVICE_URL || 'https://grocery-auth.onrender.com'}/api-docs.json`,
                 name: 'Auth Service'
             },
             {
@@ -45,7 +45,7 @@ app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(null, swaggerOptions));
 
 // 1. Auth Service Proxy
 app.use('/auth', createProxyMiddleware({ 
-    target: process.env.AUTH_SERVICE_URL || 'http://localhost:5000', 
+    target: process.env.AUTH_SERVICE_URL || 'https://grocery-auth.onrender.com', 
     changeOrigin: true,
     pathRewrite: {
         '^/auth': '/api/auth' // rewrite /auth/register to /api/auth/register
@@ -87,6 +87,6 @@ app.get('/', (req, res) => {
 });
 
 app.listen(PORT, () => {
-    console.log(`API Gateway is running on http://localhost:${PORT}`);
-    console.log(`Routing /auth requests to ${process.env.AUTH_SERVICE_URL || 'http://localhost:5000'}`);
+    console.log(`API Gateway is running on port ${PORT}`);
+    console.log(`Routing /auth requests to ${process.env.AUTH_SERVICE_URL || 'https://grocery-auth.onrender.com'}`);
 });
