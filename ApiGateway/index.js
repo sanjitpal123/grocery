@@ -32,7 +32,7 @@ const swaggerOptions = {
                 name: 'Billing Service'
             },
             {
-                url: `${process.env.CUSTOMER_SERVICE_URL || 'http://localhost:5003'}/api-docs.json`,
+                url: `${process.env.CUSTOMER_SERVICE_URL || 'https://grocery-customer.onrender.com'}/api-docs.json`,
                 name: 'Customer Service'
             }
         ]
@@ -73,7 +73,7 @@ app.use('/billing', createProxyMiddleware({
 
 // 4. Customer Service Proxy
 app.use('/customer', createProxyMiddleware({ 
-    target: process.env.CUSTOMER_SERVICE_URL || 'http://localhost:5003', 
+    target: process.env.CUSTOMER_SERVICE_URL || 'https://grocery-customer.onrender.com', 
     changeOrigin: true,
     pathRewrite: {
         '^/customer': '/api/customer'
