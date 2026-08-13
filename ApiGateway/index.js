@@ -28,7 +28,7 @@ const swaggerOptions = {
                 name: 'Products Service'
             },
             {
-                url: `${process.env.BILLING_SERVICE_URL || 'http://localhost:5002'}/api-docs.json`,
+                url: `${process.env.BILLING_SERVICE_URL || 'https://grocery-billing-9or4.onrender.com'}/api-docs.json`,
                 name: 'Billing Service'
             },
             {
@@ -64,7 +64,7 @@ app.use('/products', createProxyMiddleware({
 // Future microservices can be added here
 // 3. Billing Service Proxy
 app.use('/billing', createProxyMiddleware({ 
-    target: process.env.BILLING_SERVICE_URL || 'http://localhost:5002', 
+    target: process.env.BILLING_SERVICE_URL || 'https://grocery-billing-9or4.onrender.com', 
     changeOrigin: true,
     pathRewrite: {
         '^/billing': '/api/billing'
