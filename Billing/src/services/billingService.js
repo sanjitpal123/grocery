@@ -7,7 +7,7 @@ export const createInvoice = async (data, authHeader) => {
     // Call Products service to deduct stock
     if (products && products.length > 0) {
         try {
-            const productsUrl = process.env.PRODUCTS_SERVICE_URL || 'http://localhost:5001';
+            const productsUrl = process.env.PRODUCTS_SERVICE_URL || 'https://grocery-products.onrender.com';
             await axios.post(`${productsUrl}/api/products/bulk-deduct`, {
                 products
             }, {
