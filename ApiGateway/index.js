@@ -24,7 +24,7 @@ const swaggerOptions = {
                 name: 'Auth Service'
             },
             {
-                url: `${process.env.PRODUCTS_SERVICE_URL || 'http://localhost:5001'}/api-docs.json`,
+                url: `${process.env.PRODUCTS_SERVICE_URL || 'https://grocery-products.onrender.com'}/api-docs.json`,
                 name: 'Products Service'
             },
             {
@@ -54,7 +54,7 @@ app.use('/auth', createProxyMiddleware({
 
 // 2. Products Service Proxy
 app.use('/products', createProxyMiddleware({ 
-    target: process.env.PRODUCTS_SERVICE_URL || 'http://localhost:5001', 
+    target: process.env.PRODUCTS_SERVICE_URL || 'https://grocery-products.onrender.com', 
     changeOrigin: true,
     pathRewrite: {
         '^/products': '/api/products'
