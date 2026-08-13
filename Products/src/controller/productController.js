@@ -83,6 +83,23 @@ export const addStock = async (req, res) => {
 };
 
 
+export const bulkDeductStock = async (req, res) => {
+    try {
+        const shopId = req.user.shopId;
+        const { products } = req.body;
+
+        if (!Array.isArray(products) || products.length === 0) {
+            return res.status(400).json({ message: "A valid array of products must be provided" });
+        }
+
+        const updatedProducts = await productService.bulkDeductStock(shopId, products);
+        res.status(200).json({ message: "Stock deducted successfully", products: updatedProducts });
+    } catch (error) {
+        res.status(400).json({ message: error.message });
+    }
+};
+
+
 export const remove = async (req, res) => {
     try {
         const shopId = req.user.shopId;

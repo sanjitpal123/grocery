@@ -1,5 +1,5 @@
 import express from 'express';
-import { create, getAll, update, remove, getProductsByShopId, addStock } from '../controller/productController.js';
+import { create, getAll, update, remove, getProductsByShopId, addStock, bulkDeductStock } from '../controller/productController.js';
 import { verifyToken } from '../middleware/verifyToken.js';
 import upload from '../middleware/upload.js';
 
@@ -158,6 +158,41 @@ router.get('/shop/:shopId', getProductsByShopId);
  *         description: Bad request
  */
 router.post('/:id/add-stock', verifyToken, addStock);
+
+
+/**
+ * @swagger
+ * /api/products/bulk-deduct:
+ *   post:
+ *     summary: Deduct stock for multiple products
+ *     tags: [Products]
+ *     security:
+ *       - bearerAuth: []
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               products:
+ *                 type: array
+ *                 items:
+ *                   type: object
+ *                   properties:
+ *                     productId:
+ *                       type: string
+ *                     quantity:
+ *                       type: number
+ *                     unit:
+ *                       type: string
+ *     responses:
+ *       200:
+ *         description: Stock deducted successfully
+ *       400:
+ *         description: Bad request
+ */
+router.post('/bulk-deduct', verifyToken, bulkDeductStock);
 
 
 /**

@@ -3,7 +3,8 @@ import * as billingService from '../services/billingService.js';
 export const createInvoice = async (req, res) => {
     try {
         const { shopId, products, totalAmount, dueAmount, paidAmount , firstName , lastName ,phoneNumber} = req.body;
-        const invoice = await billingService.createInvoice(req.body);
+        const authHeader = req.headers.authorization;
+        const invoice = await billingService.createInvoice(req.body, authHeader);
         res.status(201).json(invoice);
     } catch (error) {
         res.status(500).json({ message: error.message });

@@ -73,6 +73,44 @@ export const addStock = async (shopId, productId, payload) => {
 };
 
 
+export const bulkDeductStock = async (shopId, productsToDeduct) => {
+    const updatedProducts = [];
+    for (const item of productsToDeduct) {
+        const { productId, quantity, unit } = item;
+        const product = await productRepository.findProductById(productId);
+
+        if (!product) {
+            throw new Error(`Product not found: ${productId}`);
+        }
+        if (product.shopId.toString() !== shopId) {
+            throw new Error(`Unauthorized to update stock for product: ${productId}`);
+        }
+
+        let quantityInBaseUnit = 0;
+        
+        // Use the unit specified, defaulting to baseUnit if not provided
+        const deductUnit = unit || product.baseUnit;
+
+        if (deductUnit.toLowerCase() === product.baseUnit.toLowerCase()) {
+            quantityInBaseUnit = quantity * (product.conversionFactor || 1);
+        } else if (product.secondaryUnit && deductUnit.toLowerCase() === product.secondaryUnit.toLowerCase()) {
+            quantityInBaseUnit = quantity;
+        } else {
+            throw new Error(`Invalid unit for product ${product.name}. Must be either the base unit (${product.baseUnit}) or secondary unit (${product.secondaryUnit})`);
+        }
+
+        const newStock = product.currentStock - quantityInBaseUnit;
+        if (newStock < 0) {
+            throw new Error(`Insufficient stock for product: ${product.name}`);
+        }
+
+        const updated = await productRepository.updateProduct(productId, { currentStock: newStock });
+        updatedProducts.push(updated);
+    }
+    return updatedProducts;
+};
+
+
 export const removeProduct = async (shopId, productId) => {
     const product = await productRepository.findProductById(productId);
 

@@ -82,6 +82,11 @@ services:
         value: 5002
       - key: MONGO_URI
         sync: false
+      - key: PRODUCTS_SERVICE_URL
+        fromService:
+          type: web
+          name: grocery-products
+          envVarKey: RENDER_EXTERNAL_URL
 
   # 5. Customer Service
   - type: web
