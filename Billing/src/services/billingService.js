@@ -21,7 +21,7 @@ export const createInvoice = async (data, authHeader) => {
         }
     }
 
-    return await billingRepository.create(data);
+    return await billingRepository.create(data, authHeader);
 };
 
 export const getInvoiceById = async (id) => {
