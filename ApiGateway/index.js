@@ -44,8 +44,8 @@ app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(null, swaggerOptions));
 // Gateway Routes
 
 // 1. Auth Service Proxy
-app.use('/auth', createProxyMiddleware({ 
-    target: process.env.AUTH_SERVICE_URL || 'https://grocery-auth.onrender.com', 
+app.use('/auth', createProxyMiddleware({
+    target: 'https://grocery-auth.onrender.com',
     changeOrigin: true,
     pathRewrite: {
         '^/auth': '/api/auth' // rewrite /auth/register to /api/auth/register
@@ -53,8 +53,8 @@ app.use('/auth', createProxyMiddleware({
 }));
 
 // 2. Products Service Proxy
-app.use('/products', createProxyMiddleware({ 
-    target: process.env.PRODUCTS_SERVICE_URL || 'https://grocery-products.onrender.com', 
+app.use('/products', createProxyMiddleware({
+    target: 'https://grocery-products.onrender.com',
     changeOrigin: true,
     pathRewrite: {
         '^/products': '/api/products'
@@ -63,8 +63,8 @@ app.use('/products', createProxyMiddleware({
 
 // Future microservices can be added here
 // 3. Billing Service Proxy
-app.use('/billing', createProxyMiddleware({ 
-    target: process.env.BILLING_SERVICE_URL || 'https://grocery-billing-9or4.onrender.com', 
+app.use('/billing', createProxyMiddleware({
+    target: 'https://grocery-billing-9or4.onrender.com',
     changeOrigin: true,
     pathRewrite: {
         '^/billing': '/api/billing'
@@ -72,8 +72,8 @@ app.use('/billing', createProxyMiddleware({
 }));
 
 // 4. Customer Service Proxy
-app.use('/customer', createProxyMiddleware({ 
-    target: process.env.CUSTOMER_SERVICE_URL || 'https://grocery-customer.onrender.com', 
+app.use('/customer', createProxyMiddleware({
+    target: 'https://grocery-customer.onrender.com',
     changeOrigin: true,
     pathRewrite: {
         '^/customer': '/api/customer'
