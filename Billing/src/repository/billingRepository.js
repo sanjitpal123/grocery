@@ -5,7 +5,7 @@ export const create = async (billingData, authHeader) => {
     const {firstName , lastName ,phoneNumber }=billingData;
     const customerUrl = process.env.CUSTOMER_SERVICE_URL || 'https://grocery-customer.onrender.com';
     const customer=await axios.post(`${customerUrl}/api/customer`,{firstName , lastName, phoneNumber}, {
-        headers: { Authorization: authHeader }
+        headers: { authorization: authHeader }
     });
     if(!customer){
         throw new Error("Customer creation failed"); 

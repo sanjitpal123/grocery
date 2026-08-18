@@ -12,7 +12,7 @@ export const createInvoice = async (data, authHeader) => {
                 products
             }, {
                 headers: {
-                    Authorization: authHeader
+                    authorization: authHeader
                 }
             });
         } catch (error) {
