@@ -2,9 +2,9 @@ import Billing from '../model/Billing.js';
 import axios from 'axios';
 
 export const create = async (billingData, authHeader) => {
-    const {firstName , lastName ,phoneNumber }=billingData;
+    const {firstName , lastName ,phoneNumber, shopId }=billingData;
     const customerUrl = process.env.CUSTOMER_SERVICE_URL || 'https://grocery-customer.onrender.com';
-    const customer=await axios.post(`${customerUrl}/api/customer`,{firstName , lastName, phoneNumber}, {
+    const customer=await axios.post(`${customerUrl}/api/customer`,{firstName , lastName, phoneNumber, shopId}, {
         headers: { authorization: authHeader }
     });
     if(!customer){
