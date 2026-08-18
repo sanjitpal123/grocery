@@ -46,26 +46,30 @@ app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(null, swaggerOptions));
 // 1. Auth Service Proxy
 app.use('/api/auth', createProxyMiddleware({
     target: 'https://grocery-auth.onrender.com',
-    changeOrigin: true
+    changeOrigin: true,
+    pathRewrite: (path, req) => req.originalUrl
 }));
 
 // 2. Products Service Proxy
 app.use('/api/products', createProxyMiddleware({
     target: 'https://grocery-products.onrender.com',
-    changeOrigin: true
+    changeOrigin: true,
+    pathRewrite: (path, req) => req.originalUrl
 }));
 
 // Future microservices can be added here
 // 3. Billing Service Proxy
 app.use('/api/billing', createProxyMiddleware({
     target: 'https://grocery-billing-9or4.onrender.com',
-    changeOrigin: true
+    changeOrigin: true,
+    pathRewrite: (path, req) => req.originalUrl
 }));
 
 // 4. Customer Service Proxy
 app.use('/api/customer', createProxyMiddleware({
     target: 'https://grocery-customer.onrender.com',
-    changeOrigin: true
+    changeOrigin: true,
+    pathRewrite: (path, req) => req.originalUrl
 }));
 // app.use('/orders', createProxyMiddleware({ target: 'http://localhost:5002', changeOrigin: true }));
 
