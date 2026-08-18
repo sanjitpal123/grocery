@@ -32,6 +32,16 @@ const swaggerOptions = {
                 url: process.env.RENDER_EXTERNAL_URL || `https://grocery-billing-9or4.onrender.com`,
             },
         ],
+        components: {
+            securitySchemes: {
+                bearerAuth: {
+                    type: 'http',
+                    scheme: 'bearer',
+                    bearerFormat: 'JWT',
+                },
+            },
+        },
+        security: [{ bearerAuth: [] }],
     },
     apis: ['./src/routes/*.js'],
 };
