@@ -3,6 +3,7 @@ import {
     createProfile, 
     getCustomerByshopId
 } from '../controller/customerController.js';
+import { verifyToken } from '../middleware/verifyToken.js';
 
 const router = express.Router();
 
@@ -31,7 +32,7 @@ const router = express.Router();
  *       201:
  *         description: Profile created successfully
  */
-router.post('/', createProfile);
+router.post('/', verifyToken, createProfile);
 
 /**
  * @swagger
@@ -49,7 +50,7 @@ router.post('/', createProfile);
  *       200:
  *         description: Customer details
  */
-router.get('/:shopId', getCustomerByshopId);
+router.get('/:shopId', verifyToken, getCustomerByshopId);
 
 
 

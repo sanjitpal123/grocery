@@ -6,6 +6,7 @@ import {
     getShopInvoices, 
     updatePayment 
 } from '../controller/billingController.js';
+import { verifyToken } from '../middleware/verifyToken.js';
 
 const router = express.Router();
 
@@ -53,7 +54,7 @@ const router = express.Router();
  *       201:
  *         description: Invoice created successfully
  */
-router.post('/', createInvoice);
+router.post('/', verifyToken, createInvoice);
 
 /**
  * @swagger
@@ -71,7 +72,7 @@ router.post('/', createInvoice);
  *       200:
  *         description: Invoice details
  */
-router.get('/:id', getInvoiceById);
+router.get('/:id', verifyToken, getInvoiceById);
 
 /**
  * @swagger
@@ -89,7 +90,7 @@ router.get('/:id', getInvoiceById);
  *       200:
  *         description: List of customer invoices
  */
-router.get('/customer/:customerId', getCustomerInvoices);
+router.get('/customer/:customerId', verifyToken, getCustomerInvoices);
 
 /**
  * @swagger
@@ -107,7 +108,7 @@ router.get('/customer/:customerId', getCustomerInvoices);
  *       200:
  *         description: List of shop invoices
  */
-router.get('/shop/:shopId', getShopInvoices);
+router.get('/shop/:shopId', verifyToken, getShopInvoices);
 
 /**
  * @swagger
@@ -136,6 +137,6 @@ router.get('/shop/:shopId', getShopInvoices);
  *       200:
  *         description: Payment updated
  */
-router.put('/:id/payment', updatePayment);
+router.put('/:id/payment', verifyToken, updatePayment);
 
 export default router;
