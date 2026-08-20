@@ -1,6 +1,6 @@
 import express from 'express';
-import { 
-    createProfile, 
+import {
+    createProfile,
     getCustomerByshopId
 } from '../controller/customerController.js';
 import { verifyToken } from '../middleware/verifyToken.js';
@@ -28,6 +28,8 @@ const router = express.Router();
  *                 type: string
  *               phoneNumber:
  *                 type: string
+ *               dueamount:
+ *                type: string
  *     responses:
  *       201:
  *         description: Profile created successfully
@@ -51,7 +53,4 @@ router.post('/', verifyToken, createProfile);
  *         description: Customer details
  */
 router.get('/:shopId', verifyToken, getCustomerByshopId);
-
-
-
 export default router;

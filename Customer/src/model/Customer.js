@@ -8,9 +8,11 @@ const customerSchema = new mongoose.Schema({
         type: String,
         required: true
     },
+    dueamount: {
+        type: String
+    },
     lastName: {
         type: String,
-        required: true
     },
     phoneNumber: {
         type: String,

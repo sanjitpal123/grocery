@@ -2,8 +2,8 @@ import * as customerService from '../services/customerService.js';
 
 export const createProfile = async (req, res) => {
     try {
-        const { shopId, phoneNumber, firstName, lastName } = req.body;
-        if (!shopId || !phoneNumber || !firstName || !lastName) {
+        const { shopId, phoneNumber, firstName, lastName, dueamount } = req.body;
+        if (!shopId || !phoneNumber || !firstName) {
             return res.status(400).json({ message: "shopId, phoneNumber, firstName, and lastName are required" });
         }
 
