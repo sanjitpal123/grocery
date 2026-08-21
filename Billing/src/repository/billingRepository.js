@@ -7,19 +7,20 @@ export const create = async (billingData, authHeader) => {
         const lastName = billingData.lastName || "Customer";
         const phoneNumber = billingData.phoneNumber || "0000000000";
         const shopId = billingData.shopId;
+        const dueamount = billingData.dueAmount;
 
         const customerUrl = process.env.CUSTOMER_SERVICE_URL || 'https://grocery-customer.onrender.com';
         let customer;
         try {
-            customer = await axios.post(`${customerUrl}/api/customer`, {firstName, lastName, phoneNumber, shopId}, {
+            customer = await axios.post(`${customerUrl}/api/customer`, { firstName, lastName, phoneNumber, shopId, dueamount }, {
                 headers: { authorization: authHeader }
             });
         } catch (err) {
             throw new Error(`Customer API (${customerUrl}) failed: ` + (err.response?.data?.message || err.message));
         }
 
-        if(!customer || !customer.data) {
-            throw new Error("Customer creation failed"); 
+        if (!customer || !customer.data) {
+            throw new Error("Customer creation failed");
         }
         billingData.customerId = customer.data._id;
     }
