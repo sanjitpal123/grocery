@@ -11,7 +11,8 @@ export const createInvoice = async (data, authHeader) => {
                 products
             }, {
                 headers: {
-                    authorization: authHeader
+                    authorization: authHeader,
+                    'User-Agent': 'Mozilla/5.0'
                 }
             });
         } catch (error) {

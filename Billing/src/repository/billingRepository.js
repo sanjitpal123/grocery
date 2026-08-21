@@ -12,8 +12,8 @@ export const create = async (billingData, authHeader) => {
         const customerUrl = process.env.CUSTOMER_SERVICE_URL || 'https://grocery-customer.onrender.com';
         let customer;
         try {
-            customer = await axios.post(`${customerUrl}/api/customer`, { firstName, lastName, phoneNumber, shopId, dueamount }, {
-                headers: { authorization: authHeader }
+            customer = await axios.post(`${customerUrl}/api/customer`, {firstName, lastName, phoneNumber, shopId}, {
+                headers: { authorization: authHeader, 'User-Agent': 'Mozilla/5.0' }
             });
         } catch (err) {
             throw new Error(`Customer API (${customerUrl}) failed: ` + (err.response?.data?.message || err.message));
