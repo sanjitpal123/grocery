@@ -36,7 +36,11 @@ export const getCustomerById = async (req, res) => {
 
 export const updateCustomer = async (req, res) => {
     try {
-        const customer = await customerService.updateCustomer(req.params.id, req.body);
+        const updateData = { ...req.body };
+        // ensure no last name is edited
+        delete updateData.lastName;
+
+        const customer = await customerService.updateCustomer(req.params.id, updateData);
         if (!customer) return res.status(404).json({ message: "Customer not found" });
         res.status(200).json(customer);
     } catch (error) {

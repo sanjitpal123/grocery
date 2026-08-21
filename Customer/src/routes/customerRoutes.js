@@ -77,8 +77,8 @@ router.get('/:id', verifyToken, getCustomerById);
 
 /**
  * @swagger
- * /api/customer/{id}:
- *   put:
+ * /api/customer/edit/{id}:
+ *   post:
  *     summary: Update customer by customer ID
  *     tags: [Customer]
  *     parameters:
@@ -96,20 +96,20 @@ router.get('/:id', verifyToken, getCustomerById);
  *             properties:
  *               firstName:
  *                 type: string
- *               lastName:
- *                 type: string
  *               phoneNumber:
+ *                 type: string
+ *               dueamount:
  *                 type: string
  *     responses:
  *       200:
  *         description: Customer updated successfully
  */
-router.put('/:id', verifyToken, updateCustomer);
+router.post('/edit/:id', verifyToken, updateCustomer);
 
 /**
  * @swagger
- * /api/customer/{id}:
- *   delete:
+ * /api/customer/delete/{id}:
+ *   post:
  *     summary: Delete customer by customer ID
  *     tags: [Customer]
  *     parameters:
@@ -122,6 +122,6 @@ router.put('/:id', verifyToken, updateCustomer);
  *       200:
  *         description: Customer deleted successfully
  */
-router.delete('/:id', verifyToken, deleteCustomer);
+router.post('/delete/:id', verifyToken, deleteCustomer);
 
 export default router;
