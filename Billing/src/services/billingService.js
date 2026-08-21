@@ -2,8 +2,7 @@ import * as billingRepository from '../repository/billingRepository.js';
 import axios from 'axios';
 
 export const createInvoice = async (data, authHeader) => {
-    const {firstName, lastName, phoneNumber, shopId, products}=data;
-    
+    const { firstName, lastName, phoneNumber, shopId, products } = data;
     // Call Products service to deduct stock
     if (products && products.length > 0) {
         try {
@@ -17,10 +16,9 @@ export const createInvoice = async (data, authHeader) => {
             });
         } catch (error) {
             console.error("Failed to deduct stock:", error.response?.data || error.message);
-            throw new Error(error.response?.data?.message || "Failed to deduct stock from inventory");
+            throw new Error(`Products API (${productsUrl}) failed: ` + (error.response?.data?.message || error.message));
         }
     }
-
     return await billingRepository.create(data, authHeader);
 };
 

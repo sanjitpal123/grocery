@@ -9,9 +9,15 @@ export const create = async (billingData, authHeader) => {
         const shopId = billingData.shopId;
 
         const customerUrl = process.env.CUSTOMER_SERVICE_URL || 'https://grocery-customer.onrender.com';
-        const customer = await axios.post(`${customerUrl}/api/customer`, {firstName, lastName, phoneNumber, shopId}, {
-            headers: { authorization: authHeader }
-        });
+        let customer;
+        try {
+            customer = await axios.post(`${customerUrl}/api/customer`, {firstName, lastName, phoneNumber, shopId}, {
+                headers: { authorization: authHeader }
+            });
+        } catch (err) {
+            throw new Error(`Customer API (${customerUrl}) failed: ` + (err.response?.data?.message || err.message));
+        }
+
         if(!customer || !customer.data) {
             throw new Error("Customer creation failed"); 
         }
