@@ -1,4 +1,5 @@
 import Billing from '../model/Billing.js';
+import Customer from '../model/Customer.js';
 import axios from 'axios';
 import mongoose from 'mongoose';
 
@@ -12,16 +13,14 @@ export const create = async (billingData, authHeader) => {
 
         let customerId;
         try {
-            const customerCollection = mongoose.connection.collection('customers');
-            const result = await customerCollection.insertOne({
+            const customerDoc = await Customer.create({
                 firstName,
                 lastName,
                 phoneNumber,
                 shopId,
-                createdAt: new Date(),
-                updatedAt: new Date()
+                dueamount
             });
-            customerId = result.insertedId.toString();
+            customerId = customerDoc._id.toString();
         } catch (err) {
             throw new Error(`Database error creating walk-in customer: ` + err.message);
         }
