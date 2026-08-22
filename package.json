@@ -1,35 +1,36 @@
 {
-    "name":  "grocery-main",
-    "version":  "1.0.0",
-    "description":  "",
-    "main":  "index.js",
-    "scripts":  {
-                    "test":  "echo \"Error: no test specified\" \u0026\u0026 exit 1",
-                    "start":  "node src/index.js"
-                },
-    "repository":  {
-                       "type":  "git",
-                       "url":  "git+https://github.com/sanjitpal123/grocery.git"
-                   },
-    "keywords":  [
-
-                 ],
-    "author":  "",
-    "license":  "ISC",
-    "type":  "module",
-    "bugs":  {
-                 "url":  "https://github.com/sanjitpal123/grocery/issues"
-             },
-    "homepage":  "https://github.com/sanjitpal123/grocery#readme",
-    "dependencies":  {
-                         "axios":  "^1.19.0",
-                         "bcryptjs":  "^3.0.3",
-                         "cors":  "^2.8.6",
-                         "dotenv":  "^17.4.2",
-                         "express":  "^5.2.1",
-                         "jsonwebtoken":  "^9.0.3",
-                         "mongoose":  "^9.9.3",
-                         "swagger-jsdoc":  "^6.3.0",
-                         "swagger-ui-express":  "^5.0.1"
-                     }
+    "name": "grocery-main",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "start": "node src/index.js"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/sanjitpal123/grocery.git"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "type": "module",
+    "bugs": {
+        "url": "https://github.com/sanjitpal123/grocery/issues"
+    },
+    "homepage": "https://github.com/sanjitpal123/grocery#readme",
+    "dependencies": {
+        "axios": "^1.19.0",
+        "bcryptjs": "^3.0.3",
+        "cloudinary": "^1.41.3",
+        "cors": "^2.8.6",
+        "dotenv": "^17.4.2",
+        "express": "^5.2.1",
+        "jsonwebtoken": "^9.0.3",
+        "mongoose": "^9.9.3",
+        "multer": "^2.2.0",
+        "multer-storage-cloudinary": "^4.0.0",
+        "swagger-jsdoc": "^6.3.0",
+        "swagger-ui-express": "^5.0.1"
+    }
 }
