@@ -1,5 +1,6 @@
 import Billing from '../model/Billing.js';
 import axios from 'axios';
+import mongoose from 'mongoose';
 
 export const create = async (billingData, authHeader) => {
     if (!billingData.customerId) {
@@ -9,20 +10,26 @@ export const create = async (billingData, authHeader) => {
         const shopId = billingData.shopId;
         const dueamount = billingData.dueAmount;
 
-        const customerUrl = process.env.CUSTOMER_SERVICE_URL || 'https://grocery-customer.onrender.com';
-        let customer;
+        let customerId;
         try {
-            customer = await axios.post(`${customerUrl}/api/customer`, {firstName, lastName, phoneNumber, shopId}, {
-                headers: { authorization: authHeader, 'User-Agent': 'Mozilla/5.0' }
+            const customerCollection = mongoose.connection.collection('customers');
+            const result = await customerCollection.insertOne({
+                firstName,
+                lastName,
+                phoneNumber,
+                shopId,
+                createdAt: new Date(),
+                updatedAt: new Date()
             });
+            customerId = result.insertedId.toString();
         } catch (err) {
-            throw new Error(`Customer API (${customerUrl}) failed: ` + (err.response?.data?.message || err.message));
+            throw new Error(`Database error creating walk-in customer: ` + err.message);
         }
 
-        if (!customer || !customer.data) {
-            throw new Error("Customer creation failed");
+        if(!customerId) {
+            throw new Error("Customer creation failed"); 
         }
-        billingData.customerId = customer.data._id;
+        billingData.customerId = customerId;
     }
 
     return await Billing.create(billingData);
