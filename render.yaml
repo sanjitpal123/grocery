@@ -1,31 +1,15 @@
 services:
-  # 1. Auth Service
+  # Monolithic API Backend
   - type: web
-    name: grocery-auth
+    name: grocery-backend
     env: node
     plan: free
-    rootDir: Auth
+    rootDir: .
     buildCommand: npm install
     startCommand: npm start
     envVars:
       - key: PORT
-        value: 5000
-      - key: JWT_SECRET
-        sync: false
-      - key: MONGO_URI
-        sync: false
-
-  # 2. Products Service
-  - type: web
-    name: grocery-products
-    env: node
-    plan: free
-    rootDir: Products
-    buildCommand: npm install
-    startCommand: npm start
-    envVars:
-      - key: PORT
-        value: 5001
+        value: 4000
       - key: JWT_SECRET
         sync: false
       - key: MONGO_URI
@@ -35,69 +19,4 @@ services:
       - key: COULD_API_KEY
         sync: false
       - key: COUlD_SECRET
-        sync: false
-
-  # 3. API Gateway
-  - type: web
-    name: grocery-gateway
-    env: node
-    plan: free
-    rootDir: ApiGateway
-    buildCommand: npm install
-    startCommand: npm start
-    envVars:
-      - key: PORT
-        value: 4000
-      - key: AUTH_SERVICE_URL
-        fromService:
-          type: web
-          name: grocery-auth
-          envVarKey: RENDER_EXTERNAL_URL
-      - key: PRODUCTS_SERVICE_URL
-        fromService:
-          type: web
-          name: grocery-products
-          envVarKey: RENDER_EXTERNAL_URL
-      - key: BILLING_SERVICE_URL
-        fromService:
-          type: web
-          name: grocery-billing
-          envVarKey: RENDER_EXTERNAL_URL
-      - key: CUSTOMER_SERVICE_URL
-        fromService:
-          type: web
-          name: grocery-customer
-          envVarKey: RENDER_EXTERNAL_URL
-
-  # 4. Billing Service
-  - type: web
-    name: grocery-billing
-    env: node
-    plan: free
-    rootDir: Billing
-    buildCommand: npm install
-    startCommand: npm start
-    envVars:
-      - key: PORT
-        value: 5002
-      - key: MONGO_URI
-        sync: false
-      - key: PRODUCTS_SERVICE_URL
-        fromService:
-          type: web
-          name: grocery-products
-          envVarKey: RENDER_EXTERNAL_URL
-
-  # 5. Customer Service
-  - type: web
-    name: grocery-customer
-    env: node
-    plan: free
-    rootDir: Customer
-    buildCommand: npm install
-    startCommand: npm start
-    envVars:
-      - key: PORT
-        value: 5003
-      - key: MONGO_URI
         sync: false
